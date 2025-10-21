@@ -15,8 +15,11 @@ build/
 # VS Code
 .vscode/
 
-# dotenv
+# Environment files
 .env
+.env.*
+!.env.example
+aws_credentials.txt
 
 # Node
 node_modules/
