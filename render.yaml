@@ -1,13 +1,15 @@
 services:
-  # Backe  # Frontend static site
+  # Frontend static site
   - type: web
     name: aws-iam-assessment-ui
     env: static
     buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
-        value: https://aws-iam-assessment-api.onrender.com # Will be updated with actual backend URLrvice
+        value: https://aws-iam-assessment-api.onrender.com
+
+  # Backend (Python API)
   - type: web
     name: aws-iam-assessment-api
     env: python
@@ -24,12 +26,3 @@ services:
       - key: AWS_REGION
         sync: false
     autoDeploy: true
-
-  # Frontend static site
-  - type: web
-    name: aws-iam-assessment-ui
-    buildCommand: cd frontend && npm install && npm run build
-  staticPublishPath: frontend/dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://aws-iam-assessment-api.onrender.com # Will be updated with actual backend URL
