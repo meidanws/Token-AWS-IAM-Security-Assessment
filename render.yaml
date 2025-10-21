@@ -18,7 +18,7 @@ services:
     autoDeploy: true
 
   # Frontend static site
-  - type: static_site
+  - type: web
     name: aws-iam-assessment-ui
     buildCommand: cd frontend && npm install && npm run build
     publishPath: frontend/dist
