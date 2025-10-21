@@ -7,8 +7,8 @@ import os
 from config import AWS_REGION, REPORT_FILE, USERS_FILE, PORT
 from iam_assessment.aws_utils import list_all_iam_users, save_json_file
 from iam_assessment.base_assessment import IAMSecurityAssessment
-from iam_assessment.checks.mfa_check import check_users_without_mfa
-from iam_assessment.checks.old_keys_check import check_old_access_keys
+from iam_assessment.checks.mfa_check import MFACheck
+from iam_assessment.checks.old_keys_check import OldAccessKeysCheck
 from iam_assessment.report_writer import load_json_report
 
 # Logging
@@ -42,13 +42,15 @@ def download_users():
 
 @app.route("/api/run-assessment", methods=["GET"])
 def run_assessment():
-    """
-    Task 2: Run assessment checks and save report file.
-    """
+ 
     try:
         assessment = IAMSecurityAssessment(report_path=REPORT_FILE)
-        assessment.register_check(check_users_without_mfa)
-        assessment.register_check(lambda a: check_old_access_keys(a, days_threshold=90))
+        
+        # Register security checks
+        # Add new checks here after implementing them in the checks/ directory
+        assessment.register_check(MFACheck())
+        assessment.register_check(OldAccessKeysCheck(days_threshold=90))
+        
         report = assessment.run()
         return jsonify(report)
     except Exception as exc:
