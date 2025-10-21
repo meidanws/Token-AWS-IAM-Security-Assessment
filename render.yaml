@@ -1,5 +1,13 @@
 services:
-  # Backend API service
+  # Backe  # Frontend static site
+  - type: web
+    name: aws-iam-assessment-ui
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: VITE_API_URL
+        value: https://aws-iam-assessment-api.onrender.com # Will be updated with actual backend URLrvice
   - type: web
     name: aws-iam-assessment-api
     env: python
