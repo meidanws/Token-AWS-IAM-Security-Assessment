@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+env/
+.venv/
+venv/
+pip-wheel-metadata/
+htmlcov/
+dist/
+build/
+*.egg-info/
+
+# VS Code
+.vscode/
+
+# dotenv
+.env
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# JSON output files (optional to keep them out of repo)
+iam_users.json
+iam_security_report.json
