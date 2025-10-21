@@ -3,6 +3,7 @@ services:
   - type: web
     name: aws-iam-assessment-api
     env: python
+    plan: free
     buildCommand: ./build.sh
     startCommand: cd backend && gunicorn app:app
     envVars:
@@ -14,13 +15,13 @@ services:
         sync: false
       - key: AWS_REGION
         sync: false
+    autoDeploy: true
 
   # Frontend static site
-  - type: web
+  - type: static
     name: aws-iam-assessment-ui
-    env: static
     buildCommand: cd frontend && npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    publishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
         value: https://aws-iam-assessment-api.onrender.com # Will be updated with actual backend URL
