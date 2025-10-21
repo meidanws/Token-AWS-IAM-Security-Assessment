@@ -21,11 +21,8 @@ services:
   - type: web
     name: aws-iam-assessment-ui
     buildCommand: cd frontend && npm install && npm run build
-    publishPath: frontend/dist
+    staticDistDirectory: dist
+    rootDirectory: frontend
     envVars:
       - key: VITE_API_URL
         value: https://aws-iam-assessment-api.onrender.com # Will be updated with actual backend URL
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html
