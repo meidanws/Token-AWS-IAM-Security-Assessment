@@ -48,8 +48,8 @@ def run_assessment():
         
         # Register security checks
         # Add new checks here after implementing them in the checks/ directory
-        assessment.register_check(check_users_without_mfa())
-        assessment.register_check(check_old_access_keys(days_threshold=90))
+        assessment.register_check(lambda a: check_users_without_mfa(a))
+        assessment.register_check(lambda a: check_old_access_keys(a, days_threshold=90))
         
         report = assessment.run()
         return jsonify(report)
